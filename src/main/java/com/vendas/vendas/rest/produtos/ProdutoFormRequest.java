@@ -1,3 +1,6 @@
+package com.vendas.vendas.rest.produtos;
+import java.math.BigDecimal;
+
 public class ProdutoFormRequest {
     private String descricao;
     private String nome;
