@@ -10,7 +10,7 @@ import com.vendas.vendas.model.Produto;
 import com.vendas.vendas.model.repository.ProdutoRepository;
 
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/api/produtos")
 @CrossOrigin("*")
 public class ProdutoController {
     @Autowired
@@ -18,13 +18,6 @@ public class ProdutoController {
     @PostMapping
     public ProdutoFormRequest salvar (@RequestBody ProdutoFormRequest produto){
          Produto entidadeProduto=produto.toModel();
-
-          //new Produto(
-        // produto.getNome(),
-        // produto.getDescricao(),
-        // produto.getPreco(),
-        // produto.getSku()
-        // );
         repository.save(entidadeProduto);
 
         return ProdutoFormRequest.fromModel(entidadeProduto);

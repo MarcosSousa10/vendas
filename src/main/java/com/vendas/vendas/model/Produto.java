@@ -25,7 +25,7 @@ public class Produto {
     private BigDecimal preco;
     @Column
     private String sku;
-    @Column(name="data_cadastro")
+    @Column
     private LocalDate dataCadastro;
 
     public Produto( String nome, String descricao, BigDecimal preco, String sku) {
