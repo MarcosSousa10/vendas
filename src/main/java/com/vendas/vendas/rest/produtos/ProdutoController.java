@@ -17,13 +17,16 @@ public class ProdutoController {
     private ProdutoRepository repository;
     @PostMapping
     public ProdutoFormRequest salvar (@RequestBody ProdutoFormRequest produto){
-        Produto entidadeProduto= new Produto(
-        produto.getNome(),
-        produto.getDescricao(),
-        produto.getPreco(),
-        produto.getSku()
-        );
+         Produto entidadeProduto=produto.toModel();
+
+          //new Produto(
+        // produto.getNome(),
+        // produto.getDescricao(),
+        // produto.getPreco(),
+        // produto.getSku()
+        // );
         repository.save(entidadeProduto);
-        return produto;
+
+        return ProdutoFormRequest.fromModel(entidadeProduto);
     }
 }
