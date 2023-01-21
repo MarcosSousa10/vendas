@@ -1,11 +1,15 @@
 package com.vendas.vendas.rest.produtos;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +27,17 @@ import com.vendas.vendas.model.repository.ProdutoRepository;
 public class ProdutoController {
     @Autowired
     private ProdutoRepository repository;
+    @GetMapping
+    public List<ProdutoFormRequest> getLista(){
+        // try {
+        //   //se quiser latencia  Thread.sleep(5000);
+        // } catch (InterruptedException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
+        return repository.findAll().stream().map(p-> ProdutoFormRequest.fromModel(p))
+        .collect(Collectors.toList());
+    }
     @PostMapping
     public ProdutoFormRequest salvar (@RequestBody ProdutoFormRequest produto){
          Produto entidadeProduto=produto.toModel();
