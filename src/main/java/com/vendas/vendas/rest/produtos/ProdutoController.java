@@ -38,7 +38,7 @@ public class ProdutoController {
         return repository.findAll().stream().map(p-> ProdutoFormRequest.fromModel(p))
         .collect(Collectors.toList());
     }
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public ResponseEntity<ProdutoFormRequest> GetById(@PathVariable Long id){
         Optional<Produto> produtoExistente= repository.findById(id);
         if(produtoExistente.isEmpty()){
