@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.vendas.vendas.model.Cliente;
 import com.vendas.vendas.model.repository.ClienteRepository;
 
-import jakarta.annotation.Generated;
-
 @RestController
 @RequestMapping("/api/clientes")
 @CrossOrigin("*")

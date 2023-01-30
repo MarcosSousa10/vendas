@@ -2,16 +2,19 @@ package com.vendas.vendas.rest.clientes;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vendas.vendas.model.Cliente;
 
 public class ClienteFormRequest {
     private Long id;
     private String nome;
     private String cpf;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
     private String endereco;
     private String email;
     private String telefone;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate cadastro;
     public Long getId() {
         return id;
