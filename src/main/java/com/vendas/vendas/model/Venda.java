@@ -1,6 +1,7 @@
 package com.vendas.vendas.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.ManyToAny;
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 @Entity
 
@@ -32,6 +34,12 @@ public class Venda {
    private List<ItemVenda> itens;
    @Column
    private BigDecimal total;
+   @Column(name = "data-cadastro")
+   private LocalDateTime dataCadastro;
+   @PrePersist
+   public void prePersist(){
+    setDataCadastro(LocalDateTime.now());
+   }
 public Long getId() {
     return id;
 }
@@ -66,6 +74,12 @@ public void setTotal(BigDecimal total) {
 public String toString() {
     return "Venda [id=" + id + ", cliente=" + cliente + ", FormaPagamento=" + FormaPagamento + ", itens=" + itens
             + ", total=" + total + "]";
+}
+public LocalDateTime getDataCadastro() {
+    return dataCadastro;
+}
+public void setDataCadastro(LocalDateTime dataCadastro) {
+    this.dataCadastro = dataCadastro;
 } 
 
 
