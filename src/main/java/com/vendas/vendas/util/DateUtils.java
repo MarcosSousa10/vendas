@@ -14,7 +14,7 @@ public class DateUtils {
 	public static final Date DATA_INICIO_PADRAO;
 	
 	static {
-		DATA_INICIO_PADRAO = DateUtils.fromString("01/01/1970");
+		DATA_INICIO_PADRAO = DateUtils.fromString("01/01/2020");
 	}
 	
 	public static Date fromString(String dataString) {

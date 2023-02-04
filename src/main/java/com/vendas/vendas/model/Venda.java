@@ -34,7 +34,7 @@ public class Venda {
    private List<ItemVenda> itens;
    @Column
    private BigDecimal total;
-   @Column(name = "data-cadastro")
+   @Column(name = "data_cadastro")
    private LocalDateTime dataCadastro;
    @PrePersist
    public void prePersist(){
@@ -81,6 +81,7 @@ public LocalDateTime getDataCadastro() {
 public void setDataCadastro(LocalDateTime dataCadastro) {
     this.dataCadastro = dataCadastro;
 } 
+
 
 
 }

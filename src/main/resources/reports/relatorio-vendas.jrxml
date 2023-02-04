@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relario-vendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d242a44-6676-47ee-aca8-2d7349cf9cef">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relario-vendas" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d242a44-6676-47ee-aca8-2d7349cf9cef">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="banco-de-dados-venedas.jrdax"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<parameter name="DATA _INICIO" class="java.util.Date"/>
 	<parameter name="DATA_FIM" class="java.util.Date"/>
 	<parameter name="ID_CLIENTE" class="java.lang.Long"/>
+	<parameter name="DATA_INICIO" class="java.util.Date"/>
 	<queryString>
 		<![CDATA[select 
 	v.id as codigo,
 	c.nome as nomecliente,
 	v.total as total,
-	v.forma_pagamento
+	v.forma_pagamento,
+	v.data_cadastro
 from venda as v
-join cliente as c on c.id = v.id_cliente]]>
+join cliente as c on c.id = v.id_cliente
+where 1=1
+and (v.id_cliente=$P{ID_CLIENTE} or $P{ID_CLIENTE} is null)
+and v.data_cadastro between $P{DATA_INICIO} and $P{DATA_FIM}
+order by c.nome,v.data_cadastro desc ]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
@@ -33,6 +38,11 @@ join cliente as c on c.id = v.id_cliente]]>
 	<field name="forma_pagamento" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="forma_pagamento"/>
 		<property name="com.jaspersoft.studio.field.label" value="forma_pagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
+	</field>
+	<field name="data_cadastro" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data_cadastro"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_cadastro"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="venda"/>
 	</field>
 	<variable name="total1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
@@ -64,7 +74,7 @@ join cliente as c on c.id = v.id_cliente]]>
 		</band>
 	</title>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="41" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#919191" uuid="d7584e14-2b87-427b-a6e1-9a89d19b3a56">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="961b594a-1f30-4afe-95d7-88c2d0660ca7"/>
@@ -75,7 +85,7 @@ join cliente as c on c.id = v.id_cliente]]>
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="100" y="0" width="280" height="30" forecolor="#FFFFFF" backcolor="#919191" uuid="86e46760-d562-4874-83d4-ccad7683d7fe">
+				<reportElement mode="Opaque" x="100" y="0" width="180" height="30" forecolor="#FFFFFF" backcolor="#919191" uuid="86e46760-d562-4874-83d4-ccad7683d7fe">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb70b1c0-4283-48c4-aac7-6a8bcaad1dfc"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -101,6 +111,13 @@ join cliente as c on c.id = v.id_cliente]]>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#919191" uuid="5836c5af-f8cd-4ee6-8e9d-6533630e80a8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -120,7 +137,7 @@ join cliente as c on c.id = v.id_cliente]]>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="280" height="30" uuid="94eaa171-5b57-452d-9208-533b30c51fb9">
+				<reportElement x="100" y="0" width="180" height="30" uuid="94eaa171-5b57-452d-9208-533b30c51fb9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bb70b1c0-4283-48c4-aac7-6a8bcaad1dfc"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -146,10 +163,17 @@ join cliente as c on c.id = v.id_cliente]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="280" y="2" width="100" height="30" uuid="6bb19e6c-071e-43a5-a91f-d2e18bd68fc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_cadastro}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="30" splitType="Stretch">
+		<band height="40" splitType="Stretch">
 			<textField>
 				<reportElement mode="Opaque" x="480" y="0" width="70" height="30" backcolor="#F5F5F5" uuid="4b5690b4-7549-481d-acda-4381337c4a88"/>
 				<box>
@@ -190,4 +214,15 @@ join cliente as c on c.id = v.id_cliente]]>
 			</textField>
 		</band>
 	</pageFooter>
+	<noData>
+		<band height="62">
+			<staticText>
+				<reportElement x="3" y="10" width="550" height="30" uuid="b76e588c-7152-4888-868c-4dd5744e7aa7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Digiface" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nenhum Registro Encontrado Para Os Parâmetros Informados.]]></text>
+			</staticText>
+		</band>
+	</noData>
 </jasperReport>
