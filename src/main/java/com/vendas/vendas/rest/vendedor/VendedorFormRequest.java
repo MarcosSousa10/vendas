@@ -56,6 +56,8 @@ public class VendedorFormRequest {
         this.telefone = telefone;
         this.cadastroVendedor = cadastroVendedor;
     }
+    public VendedorFormRequest() {
+    }
     public Vendedor toModel(){
         return new Vendedor(id, cpf, nome, telefone, email,cadastroVendedor);
     }

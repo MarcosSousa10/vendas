@@ -24,7 +24,7 @@ public class Vendedor {
     private String nome;
 
     @Column(name = "cpf", length = 20)
-    private String CPF;
+    private String cpf;
 
     @Column
     private String telefone;
@@ -56,11 +56,11 @@ public class Vendedor {
     }
 
     public String getCPF() {
-        return CPF;
+        return cpf;
     }
 
-    public void setCPF(String cPF) {
-        CPF = cPF;
+    public void setCPF(String cpf) {
+        cpf = cpf;
     }
 
     public String getTelefone() {
@@ -87,10 +87,10 @@ public class Vendedor {
         this.dataCadastroVendedor = dataCadastroVendedor;
     }
 
-    public Vendedor(Long id, String nome, String cPF, String telefone, String email, LocalDate dataCadastroVendedor) {
+    public Vendedor(Long id, String nome, String cpf, String telefone, String email, LocalDate dataCadastroVendedor) {
         this.id = id;
         this.nome = nome;
-        CPF = cPF;
+        cpf = cpf;
         this.telefone = telefone;
         this.email = email;
         this.dataCadastroVendedor = dataCadastroVendedor;
@@ -101,7 +101,7 @@ public class Vendedor {
 
     @Override
     public String toString() {
-        return "Vendedor [id=" + id + ", nome=" + nome + ", CPF=" + CPF + ", telefone=" + telefone + ", email=" + email
+        return "Vendedor [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", email=" + email
                 + ", dataCadastroVendedor=" + dataCadastroVendedor + "]";
     }
     
