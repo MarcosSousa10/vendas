@@ -65,7 +65,10 @@ public class DashboardData {
         this.preencherMesesfaltantes();
     }
     
- public void preencherMesesfaltantes(){
+ public DashboardData(int i, int j, int k, int l) {
+    }
+
+public void preencherMesesfaltantes(){
     Integer mesMaximo =  getVendasPorMes().stream().mapToInt(VendasPorMes::getMes).max().getAsInt();
     List<Integer> listaMeses = IntStream.rangeClosed(1, mesMaximo).boxed().collect(Collectors.toList());
     List<Integer> meseAdicionados = getVendasPorMes().stream().map(VendasPorMes::getMes).collect(Collectors.toList());

@@ -28,6 +28,12 @@ public class DaschboardController {
         var anoCorrente= LocalDate.now().getYear();
         var vendasPorMes = vendas.obterSomatoriaVendasPorMes(anoCorrente);
      
-        return new DashboardData(produtosCount,clienteCount,vendasCount,vendasPorMes);
+        try {
+            return new DashboardData(produtosCount,clienteCount,vendasCount,vendasPorMes);
+        } catch (Exception e) {
+            return new DashboardData(1,1,1,1);
+        }
     }
+    
+
 }
