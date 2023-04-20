@@ -34,6 +34,8 @@ public class Venda {
    private List<ItemVenda> itens;
    @Column
    private BigDecimal total;
+   @Column
+   private BigDecimal lucro;
    @Column(name = "data_cadastro")
    private LocalDateTime dataCadastro;
    @PrePersist
@@ -70,16 +72,23 @@ public BigDecimal getTotal() {
 public void setTotal(BigDecimal total) {
     this.total = total;
 }
+
 @Override
 public String toString() {
     return "Venda [id=" + id + ", cliente=" + cliente + ", FormaPagamento=" + FormaPagamento + ", itens=" + itens
-            + ", total=" + total + "]";
+            + ", total=" + total + ", lucro=" + lucro + "]";
 }
 public LocalDateTime getDataCadastro() {
     return dataCadastro;
 }
 public void setDataCadastro(LocalDateTime dataCadastro) {
     this.dataCadastro = dataCadastro;
+}
+public BigDecimal getLucro() {
+    return lucro;
+}
+public void setLucro(BigDecimal lucro) {
+    this.lucro = lucro;
 } 
 
 

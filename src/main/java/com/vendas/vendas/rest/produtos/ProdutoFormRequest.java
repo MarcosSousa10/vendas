@@ -10,25 +10,27 @@ public class ProdutoFormRequest {
     private String descricao;
     private String nome;
     private BigDecimal preco;
+    private BigDecimal custo;
     private String sku;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate cadastro;
 
     public ProdutoFormRequest() {
     }
-    public ProdutoFormRequest(Long id, String descricao, String nome, BigDecimal preco, String sku, LocalDate cadastro) {
+    public ProdutoFormRequest(Long id, String descricao, String nome, BigDecimal preco,BigDecimal custo, String sku, LocalDate cadastro) {
         this.id = id;
         this.descricao = descricao;
         this.nome = nome;
         this.preco = preco;
+        this.custo = custo;
         this.sku = sku;
         this.cadastro=cadastro;
     }
     public Produto toModel(){
-        return new Produto(id, nome, descricao, preco, sku);
+        return new Produto(id, nome, descricao, preco, custo, sku, cadastro);
     }
     public static ProdutoFormRequest fromModel(Produto produto){
-        return new ProdutoFormRequest(produto.getId(),produto.getDescricao(),produto.getNome(),produto.getPreco(),produto.getSku(),produto.getDataCadastro());
+        return new ProdutoFormRequest(produto.getId(),produto.getDescricao(),produto.getNome(),produto.getPreco(),produto.getCusto(),produto.getSku(),produto.getDataCadastro());
     }
 
     public String getDescricao() {
@@ -67,19 +69,21 @@ public class ProdutoFormRequest {
         return id;
     }
 
+    public BigDecimal getCusto() {
+        return custo;
+    }
+    public void setCusto(BigDecimal custo) {
+        this.custo = custo;
+    }
     public void setId(Long id) {
         this.id = id;
     }
 
+   
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", descricao='" + getDescricao() + "'" +
-            ", nome='" + getNome() + "'" +
-            ", preco='" + getPreco() + "'" +
-            ", sku='" + getSku() + "'" +
-            "}";
+        return "ProdutoFormRequest [id=" + id + ", descricao=" + descricao + ", nome=" + nome + ", preco=" + preco
+                + ", custo=" + custo + ", sku=" + sku + "]";
     }
     public LocalDate getCadastro() {
         return cadastro;
