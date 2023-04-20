@@ -36,6 +36,7 @@ public class Venda {
    private BigDecimal total;
    @Column
    private BigDecimal lucro;
+   
    @Column(name = "data_cadastro")
    private LocalDateTime dataCadastro;
    @PrePersist
