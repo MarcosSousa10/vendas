@@ -26,7 +26,6 @@ import com.vendas.vendas.model.Login;
 import com.vendas.vendas.model.Venda;
 import com.vendas.vendas.model.repository.LoginRepository;
 import com.vendas.vendas.model.repository.VendasRepository;
-import com.vendas.vendas.rest.produtoFixo.ProdutoFixoFormRequest;
 import com.vendas.vendas.rest.produtos.ProdutoFormRequest;
 
 @RestController
