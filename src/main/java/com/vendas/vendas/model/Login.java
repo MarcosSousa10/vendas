@@ -31,6 +31,16 @@ public class Login {
     public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+    @Override
+    public String toString() {
+        return "Login [custo=" + custo + ", dataCadastro=" + dataCadastro + "]";
+    }
+    public Login() {
+    }
+    public Login(BigDecimal custo, String dataCadastro) {
+        this.custo = custo;
+        this.dataCadastro = dataCadastro;
+    }
   
 
 
