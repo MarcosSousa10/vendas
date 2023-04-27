@@ -12,8 +12,6 @@ import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
-@Getter
-@Setter
 public class Login {
   
     @Id
@@ -21,6 +19,18 @@ public class Login {
     private BigDecimal custo;
     @Column
     private String dataCadastro;
+    public BigDecimal getCusto() {
+        return custo;
+    }
+    public void setCusto(BigDecimal custo) {
+        this.custo = custo;
+    }
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
   
 
 
