@@ -13,22 +13,22 @@ import lombok.Getter;
 import lombok.Setter;
 @Entity
 public class Login {
-  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigDecimal custo;
+    private Long dataCadastro;
+    
     @Column
-    private String dataCadastro;
+    private BigDecimal custo;
     public BigDecimal getCusto() {
         return custo;
     }
     public void setCusto(BigDecimal custo) {
         this.custo = custo;
     }
-    public String getDataCadastro() {
+    public Long getDataCadastro() {
         return dataCadastro;
     }
-    public void setDataCadastro(String dataCadastro) {
+    public void setDataCadastro(Long dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
     @Override
@@ -37,7 +37,7 @@ public class Login {
     }
     public Login() {
     }
-    public Login(BigDecimal custo, String dataCadastro) {
+    public Login(BigDecimal custo, Long dataCadastro) {
         this.custo = custo;
         this.dataCadastro = dataCadastro;
     }
