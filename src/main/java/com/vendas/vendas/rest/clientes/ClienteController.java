@@ -59,7 +59,8 @@ public class ClienteController {
         })
         .orElseGet(()-> ResponseEntity.notFound().build());
     }
-    @GetMapping
+    
+    @GetMapping("/telefone")
     public Page<ClienteFormRequest> getLista(
         @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
         @RequestParam(value = "cpf", required = false, defaultValue = "") String cpf,
@@ -71,5 +72,18 @@ public class ClienteController {
         //quando o reorno e lista
         //  return repository.findAll().stream().map(ClienteFormRequest::fromModel)
         // .collect(Collectors.toList());
+    }
+    @GetMapping
+    public Page<ClienteFormRequest> getListas(
+        
+        @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+        @RequestParam(value = "telefone", required = false, defaultValue = "") String telefone,
+        Pageable pageable
+    ){
+        System.out.println(telefone);
+        System.out.println(nome);
+        return repository
+        .buscarPorNomeTelefone("%"+nome+"%","%"+telefone+"%", pageable)
+        .map(ClienteFormRequest::fromModel);
     }
 }
